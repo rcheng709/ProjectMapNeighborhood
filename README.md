@@ -1,13 +1,18 @@
 
 # ProjectMapNeighborhood
 
-Udacity Neighborhood Map Project Front-End Nanodegree Version: 1.0 02/19/2018
+Udacity Neighborhood Map Project Front-End Nanodegree Version: 1.0 02/20/2018
 
 PROJECT LINK
 
-Check out the project by clicking the following link!
+Check out the project by clicking the following link below:
 
 https://rcheng709.github.io/ProjectMapNeighborhood/
+
+REQUIREMEMTS:
+
+-You will need Foursquare API key(check References below)
+-You will need Google API key(check References below)
 
 
 PROJECT DESCRIPTION
@@ -15,7 +20,6 @@ PROJECT DESCRIPTION
 
 - Neighborhood Map project which displays nearby AutoParts store near my home. 
 - I made use of knockout.js framework.
-- Bootstrap for styling
 - Styling designed to be friendly for all devices
 - Info Window shows data from Foursquare API 	
 - Project also uses google maps API.
@@ -24,10 +28,8 @@ PROJECT DESCRIPTION
 Running the application
 --------------------
 
-- You can run the application from the link above or below from index.html
+- You can run the application from the link provided above
 - Only tested in Google Chrome
-- Can see the output by double clicking on index.html
-- index.html can be opened with any browser on any device.
 - To edit needs editor like sublime text, notepad++ etc.
 - for testing chrome dev tools is preferred.
 
@@ -61,12 +63,25 @@ Files INCLUDED
 		-contains Open and Close slide menu to make interactive
 
 -D) index.html
+
 	- Browser creates DOM tree from this html file.
+
 	- Displays web contents of the application
 	
 -E) README.MD
+
 	- Add info about the project
 
 
 =============================================================================================================
+
+REFERENCES:
+
+<a href="http://knockoutjs.com/index.html">Knockout JS</a>
+
+<a href="https://www.w3schools.com/">W3 school for CSS guidance</a>
+
+<a href="https://developers.google.com/maps/documentation/">Google Maps API documentation</a>
+
+<a href="https://developer.foursquare.com/docs">Foursquare API documentation</a>
 
