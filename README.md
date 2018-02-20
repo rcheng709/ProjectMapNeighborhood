@@ -53,27 +53,27 @@ Files INCLUDED
 		- css file for index.html.
 
 -B) js
--	1)map.js
+-	2)map.js
 		- contains javascript code that will run the application
--	2)knockout.js
+-	3)knockout.js
 		- knockout.js library 
--	3)model.js
+-	4)model.js
 		-contains list of Autoparts store near my neighborhood
--	4)style.js
+-	5)style.js
 		-contains Open and Close slide menu to make interactive
 
--D) index.html
+-C) index.html
 
 	- Browser creates DOM tree from this html file.
 
 	- Displays web contents of the application
 	
--E) README.MD
+-D) README.MD
 
 	- Add info about the project
 
 
-=============================================================================================================
+============================================================================================
 
 REFERENCES:
 
