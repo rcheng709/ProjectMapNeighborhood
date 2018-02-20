@@ -1,10 +1,13 @@
+
+# ProjectMapNeighborhood
+
 Udacity Neighborhood Map Project Front-End Nanodegree Version: 1.0 02/19/2018
 
 PROJECT LINK
 
 Check out the project by clicking the following link!
 
-https://github.com/rcheng709/ProjectMapNeighborhood/pull/1
+https://rcheng709.github.io/ProjectMapNeighborhood/
 
 
 PROJECT DESCRIPTION
@@ -42,6 +45,7 @@ Interaction with the Application
 Files INCLUDED
 ----------------------
 
+
 -A) css
 -	1) style.css
 		- css file for index.html.
@@ -60,8 +64,9 @@ Files INCLUDED
 	- Browser creates DOM tree from this html file.
 	- Displays web contents of the application
 	
--E) readMe.MD
-	- States Overall description of project
+-E) README.MD
+	- Add info about the project
+
 
 =============================================================================================================
 
