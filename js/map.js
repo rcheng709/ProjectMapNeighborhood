@@ -1,186 +1,150 @@
-//var markersModel;
-
-// create a map variable that will be used in startMap()
 var map;
+var clientID;
+var clientSecret;
 
-// create array for listing markers in map
-var markers = [];
+var Location = function(data) {
+	var self = this;
+	this.name = data.name;
+	this.lat = data.lat;
+	this.long = data.long;
+	this.url = data.url;
+	this.address= data.address;
+	this.contact = data.contact;
+	//this.venues.id = "";
 
-// initialize map
-function startMap() {
-    // intial map view when loaded
-    var myLatLng = {
-        lat: 28.395331,
-        lng: -81.379551
-    };
-    // create a map object and get map from DOM for display
-    
+	this.visible = ko.observable(true);
 
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: myLatLng,
-        zoom: 13
-        
-    });
-        
+	var foursquareURL = 'https://api.foursquare.com/v2/venues/search?ll='+ this.lat + ',' + this.long + '&client_id=' + clientID + '&client_secret=' + clientSecret + '&v=20170801';// + '&query=' auto;
 
-    // attach a click event listener to the marker objects and open an info window on click
-    // creates infowindow for each place pin
-    var infoWindow = new google.maps.InfoWindow();
-
-    // iterates through all locations and drop pins on every single location
-    for (j = 0; j < locations.length; j++) {
-        (function() {
-            //auto store name and location iteration in variables
-            var name = locations[j].name;
-            var location = locations[j].location;
-
-            // drop marker after looping
-            var marker = new google.maps.Marker({
-                position: location,
-                map: map,
-                name: name,
-                animation: google.maps.Animation.DROP,
-                address: address
-                
-            });
-            // pushes all locations into markers array
-            markers.push(marker);
-
-            markersModel.myLocations()[j].marker = marker;
-
-            // Create an onclick event to open an infowindow at each marker.
-            marker.addListener('click', function() {
-                // show info inside infowindow when clicked
-                populateInfoWindow(this, infoWindow);
-
-                // show info retrieved from foursquare api down below
-                infoWindow.setContent(contentString);
-            });
-
-            // This function populates the infowindow when the marker is clicked. We'll only allow
-            // one infowindow which will open at the marker that is clicked, and populate based
-            // on that markers position.
-            function populateInfoWindow(marker, infoWindow) {
-                // Check to make sure the infowindow is not already opened on this marker.
-                if (infoWindow.marker != marker) {
-                    infoWindow.marker = marker;
-                    infoWindow.setContent('<div class="name">' + marker.name + '</div>' + marker.contentString);
-                    // sets animation to bounce 2 times when marker is clicked
-                    marker.setAnimation(google.maps.Animation.BOUNCE);
-                    setTimeout(function() {
-                        marker.setAnimation(null);
-                    }, 2130);
-                    infoWindow.open(map, marker);
-                    // Make sure the marker property is cleared if the infowindow is closed.
-                    infoWindow.addListener('closeclick', function() {
-                        infoWindow.setMarker = null;
-                    });
-                }
-            } // end of populateInfoWindow
-
-            // foursquare client-id and client-secret
-            var client_id = "RIHRBG21AKHMDKCBLDPY5LMSRQ151JWEDLKD05UF5BHDTD4W";
-            var client_secret = "GEIR3TDNE4ECXQU3REW1RTR41HP3PZJFGZ2NVURVR2JECV55";
-
-            // foursquare api url
-            var foursquareUrl = "https://api.foursquare.com/v2/venues/search"; // + marker.position.lat() + "," + marker.position.lng();
-            // creating variables outside of the for ajax request for faster loading
-            var venue, address, category, foursquareId, contentString;
-
-            // ajax request - foursquare api data (https://developer.foursquare.com/docs/)
-            $.ajax({
-                //	type: 'GET',
-                url: foursquareUrl,
+	$.ajax({
+                //type: 'GET',
+                url: foursquareURL,
                 dataType: "json",
                 data: {
-                    client_id: client_id,
-                    client_secret: client_secret,
-                    query: marker.name, // gets data from marker.name (array of object)
+                    client_id: clientID,
+                    client_secret: clientSecret,
+                    query: "auto", // gets data from marker.name (array of object)
                     near: "Orlando",
                     v: 20170801// version equals date
                 },
-                success: function(data) {
+                success: function() {
                     // console.log(data);
+                    for (var i=0; i< data.length; i++){
                     // get venue info
-                    venue = data.response.venues[0];
+                    venues = data.response.venues.name[0];
                     // get venue address info
-                    address = venue.location.formattedAddress[0];
+                    address = data.response.venues.location.formattedAddress[0];
                     // get venue category info
-                    category = venue.categories[0].name;
+                    contact = data.response.venues.contact.phone[0];
                     // gets link of place
-                    foursquareId = "https://foursquare.com/v/" + venue.id;
+                    foursquareId = data.response.venues.id[0];
                     // populates infowindow with api info
-                    contentString = "<div class='name'>" + "Name: " + "<span class='info'>" + name + "</span></div>" +
-                        "<div class='category'>" + "Category: " + "<span class='info'>" + category + "</span></div>" +
-                        "<div class='address'>" + "Address: " + "<span class='info'>" + address + "</span></div>" +
-                        "<div class='information'>" + "More info: " + "<a href='" + foursquareId + "'>" + "Click here" + "</a></div>";
+                    //contentString = "<div class='info-window-content'>" + "Name: " + "<span class='info'>" + self.name + "</span></div>" +
+                    //    "<div class='content'>" + "Category: " + "<span class='info'>" + self.category + "</span></div>" +
+                     //   "<div class='content'>" + "Address: " + "<span class='info'>" + self.address + "</span></div>" +
+                     //   "<div class='content'>" + "More info: " + "<a href='" + self.foursquareId + "'>" + "Click here" + "</a></div>";
+                    }    
 
-                    marker.contentString;
+                    //marker.contentString;
                 },
                 error: function() {
-                    contentString = "<div class='name'>Foursquare data is currently not available. Please try again.</div>";
+                   var contentString = "<div class='name'>Foursquare data is currently not available. Please try again.</div>";
                 }
-            });
-        })(j);
-    } // end of for loop through markers [j]
+     });           
+	this.contentString = '<div class="info-window-content"><div class="title"><b>' + self.name + "</b></div>" +
+        //'<div class="content"><a href="' + self.venues +'">' + self.venues + "</a></div>" +
+        '<div class="content">' + self.address + "</div>" +
+        '<div class="content">' + self.contact+ "</div>" +
+        '<div class="content">' + self.foursquareId + "</div></div>";
+
+	this.infoWindow = new google.maps.InfoWindow({content: self.contentString});
+
+	this.marker = new google.maps.Marker({
+			position: new google.maps.LatLng(self.lat, self.long),
+			map: map,
+			title: self.name
+	});
+
+	this.showMarker = ko.computed(function() {
+		if(this.visible() === true) {
+			this.marker.setMap(map);
+		} else {
+			this.marker.setMap(null);
+		}
+		return true;
+	}, this);
+
+	this.marker.addListener('click', function(){
+		self.contentString = '<div class="info-window-content"><div class="title"><b>' + self.name + "</b></div>" +
+        //'<div class="content"><a href="' + self.venues +'">' + self.venues + "</a></div>" +
+        '<div class="content">' + self.address + "</div>" +
+        '<div class="content">' + self.contact + "</div>" +
+        '<div class="content"><a href="URL:' + self.foursquareId +'">' + self.foursquareId +"</a></div></div>";
+
+        self.infoWindow.setContent(self.contentString);
+
+		self.infoWindow.open(map, this);
+
+		self.marker.setAnimation(google.maps.Animation.BOUNCE);
+      	setTimeout(function() {
+      		self.marker.setAnimation(null);
+     	}, 2100);
+	});
+
+	this.bounce = function(place) {
+		google.maps.event.trigger(self.marker, 'click');
+	};
+};
+
+function AppViewModel() {
+	var myLatLng = {
+        lat: 28.395331,
+        lng: -81.379551
+    };
+	var self = this;
+
+	this.searchTerm = ko.observable("");
+
+	this.locationList = ko.observableArray([]);
+
+	map = new google.maps.Map(document.getElementById('map'), {
+			zoom: 13,
+			center: myLatLng
+	});
+
+	// Foursquare API settings
+	clientID = "RIHRBG21AKHMDKCBLDPY5LMSRQ151JWEDLKD05UF5BHDTD4W";
+	clientSecret = "GEIR3TDNE4ECXQU3REW1RTR41HP3PZJFGZ2NVURVR2JECV55";
+
+	locationslist.forEach(function(locationItem){
+		self.locationList.push( new Location(locationItem));
+	});
+
+	this.filteredList = ko.computed( function() {
+		var filter = self.searchTerm().toLowerCase();
+		if (!filter) {
+			self.locationList().forEach(function(locationItem){
+				locationItem.visible(true);
+			});
+			return self.locationList();
+		} else {
+			return ko.utils.arrayFilter(self.locationList(), function(locationItem) {
+				var string = locationItem.name.toLowerCase();
+				var result = (string.search(filter) >= 0);
+				locationItem.visible(result);
+				return result;
+			});
+		}
+	}, self);
+
+	this.mapElem = document.getElementById('map');
+	this.mapElem.style.height = window.innerHeight - 50;
+}
+
+function startMap() {
+	ko.applyBindings(new AppViewModel());
 }
 
 function mapError() {
-    alert("Technical Error:Contact website administrator Map could not be loaded at this moment. Please try again");
+	alert("Google Maps has failed to load. Please check your internet connection and try again.");
 }
-
-// Location Constructor
-var Location = function(data) {
-    var self = this;
-    this.name = data.name;
-    this.location = data.location;
-    this.show = ko.observable(true);
-};
-
-// VIEW MODEL //
-var MarkersModel = function() {
-    var self = this;
-    // define Location observable array () // Observables and Observable Arrays are JS Functions
-    this.myLocations = ko.observableArray();
-    this.filteredInput = ko.observable('');
-    // this.locationsList = ko.observableArray();
-
-    for (i = 0; i < locations.length; i++) {
-        var place = new Location(locations[i]);
-        self.myLocations.push(place);
-    }
-
-    // from http://www.knockmeout.net/2011/04/utility-functions-in-knockoutjs.html
-    this.searchFilter = ko.computed(function() {
-        var filter = self.filteredInput().toLowerCase(); // listens to what user types in to the input search bar
-        // iterates through myLocations observable array
-        for (j = 0; j < self.myLocations().length; j++) {
-        	// it filters myLocations as user starts typing
-            if (self.myLocations()[j].name.toLowerCase().indexOf(filter) > -1) {
-                self.myLocations()[j].show(true); // shows locations according to match with user key words
-                if (self.myLocations()[j].marker) {
-                    self.myLocations()[j].marker.setVisible(true); // shows/filters map markers according to match with user key words
-                }
-            } else {
-                self.myLocations()[j].show(false); // hides locations according to match with user key words
-                if (self.myLocations()[j].marker) {
-                    self.myLocations()[j].marker.setVisible(false); // hides map markers according to match with user key words
-                }
-            }
-        }
-    });
-
-    // map marker bounces when location is clicked on list
-    // https://developers.google.com/maps/documentation/javascript/events
-    this.showLocation = function(locations) {
-        google.maps.event.trigger(locations.marker, 'click');
-    };
-  // set foursqError to false until the api call has run and we know if it has succeeded
- // self.foursqError = ko.observable(false);
-};
-
-// instantiate the ViewModel using the new operator and apply the bindings (aka activate KO)
-var markersModel = new MarkersModel();
-
-// activate knockout apply binding
-ko.applyBindings(markersModel);
