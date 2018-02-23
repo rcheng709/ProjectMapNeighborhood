@@ -21,7 +21,8 @@ PROJECT DESCRIPTION
 - Neighborhood Map project which displays nearby AutoParts store near my home. 
 - I made use of knockout.js framework.
 - Styling designed to be friendly for all devices
-- Info Window shows data from Foursquare API 	
+- Info Window shows data from Foursquare API 
+-!!!Note: Info Window URL" some Auto Parts store doeesn't have a URL or website	
 - Project also uses google maps API.
 
 --------------------
