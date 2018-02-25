@@ -22,6 +22,7 @@ PROJECT DESCRIPTION
 - I made use of knockout.js framework.
 - Styling designed to be friendly for all devices
 - Info Window shows data from Foursquare API 
+
 -!!!Note: Info Window URL" some Auto Parts store doeesn't have a URL or website	
 - Project also uses google maps API.
 
@@ -85,4 +86,12 @@ REFERENCES:
 <a href="https://developers.google.com/maps/documentation/">Google Maps API documentation</a>
 
 <a href="https://developer.foursquare.com/docs">Foursquare API documentation</a>
+
+=============================================================================================
+
+Online tools used:
+
+-<a href="http://jshint.com/">JS hint</a>
+
+-<a href="http://jsbeautifier.org/">JS Beautifier</a>
 
