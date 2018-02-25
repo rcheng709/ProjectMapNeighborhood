@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
   <title>Udacity Map Neighborhood Project</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -12,11 +13,7 @@
   <nav class="navbar">
     <span class="open-slide">
       <a href="#" onclick="openSlideMenu()">
-        <svg width="30" height="30">
-            <path d="M0,5 30,5" stroke="#fff" stroke-width="5"/>
-            <path d="M0,14 30,14" stroke="#fff" stroke-width="5"/>
-            <path d="M0,23 30,23" stroke="#fff" stroke-width="5"/>
-        </svg>
+        <img src=img/hamburger-menu.svg>
       </a>
     </span>
 
@@ -42,16 +39,16 @@
   </div>
   <div class ="row">
   <div id="map" class="map">
-    <h1>Auto Parts Store Near Me</h1>
+    <h1>Map did not Load. try again</h1>
   </div>
   </div>
 </div>  
     <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
     <script src="js/knockout-3.4.2.js"></script>
-    <script async type="text/javascript" src="js/style.js"></script>
-     <script async type="text/javascript" src="js/model.js"></script>-->
-    <script async type="text/javascript" src="js/map.js"></script>
-    <script async src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyBSqO36ZewrLWUzUTj93t5VhoisOljzJ-0&callback=startMap" oneerror="mapError"></script>
+    <script type="text/javascript" src="js/style.js"></script>
+     <script type="text/javascript" src="js/model.js"></script>-->
+    <script type="text/javascript" src="js/map.js"></script>
+    <script async src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyBSqO36ZewrLWUzUTj93t5VhoisOljzJ-0&callback=startMap" oneerror="mapError()"></script>
 
 </body>
 </html>
