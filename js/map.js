@@ -35,10 +35,18 @@ var Location = function(data) {
             self.URL =  "https://foursquare.com/v/"+results.id;
             if (typeof self.URL === 'undefined') {
                 self.URL = "";
+                // allows getFoursquareInfo function to load first
+                    setTimeout(function() {
+                      var infoString = '<div style="font-weight: 300">' + data.name + '</div><div>' + self.category + '</div>' + self.URL;
+                      infowindow.setContent(infoString);
+                      infowindow.open(map, marker); 
+                      marker.setAnimation(google.maps.Animation.DROP); 
+                    }, 300);   
+
             }
         },
         error: function() {
-            alert("Foursquare data is currently not available. Please try again later");
+            alert("Fatal Error: Foursquare data is currently not available. Please try again later");
         }
     });
     this.infoString = '<div class="info-window-content"><div class="title"><b>' + data.name + "</b></div>" +
@@ -71,7 +79,7 @@ var Location = function(data) {
             //'<div class="content"><a href="' + self.venues +'">' + self.venues + "</a></div>" +
             '<div class="content">' + self.category + "</div>" +
             '<div class="content">' + self.address + "</div>" +
-            '<div class="content">' + "More Info: " + "<a href='" + self.URL + "'>" + "Click here" + "</a></div>";
+            '<div class="content">' + "Foursquare Info: " + "<a href='" + self.URL + "'>" + "Click here" + "</a></div>";
 
         self.infoWindow.setContent(self.infoString);
 
@@ -137,7 +145,3 @@ function startMap() {
     ko.applyBindings(new AppViewModel());
 }
 
-function mapError() {
-     
-   alert("Google Maps has failed to load. Please check your internet connection and try again.");
-} 

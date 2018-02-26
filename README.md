@@ -21,17 +21,18 @@ PROJECT DESCRIPTION
 - Neighborhood Map project which displays nearby AutoParts store near my home. 
 - I made use of knockout.js framework.
 - Styling designed to be friendly for all devices
-- Info Window shows data from Foursquare API 
+- Info Window shows data from Foursquare API when you click on "Foursquare Info" it will\
+-redirect you to Foursquare website. 
 
 -!!!Note: Info Window URL" some Auto Parts store doeesn't have a URL or website	
-- Project also uses google maps API.
+
 
 --------------------
 Running the application
 --------------------
 
 - You can run the application from the link provided above
-- Only tested in Google Chrome
+- tested in Google Chrome and Internet Explorer
 - To edit needs editor like sublime text, notepad++ etc.
 - for testing chrome dev tools is preferred.
 
@@ -63,6 +64,8 @@ Files INCLUDED
 		-contains list of Autoparts store near my neighborhood
 -	5)style.js
 		-contains Open and Close slide menu to make interactive
+-	6)mapError.js
+		-contaions the MapError function if Google Maps did not load.
 
 -C) index.html
 
@@ -73,7 +76,8 @@ Files INCLUDED
 -D) README.MD
 
 	- Add info about the project
-
+-E) IMG
+	- Hamburger-menu.svg->to display hamburger menu
 
 ============================================================================================
 
